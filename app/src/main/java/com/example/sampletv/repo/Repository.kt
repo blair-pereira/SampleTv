@@ -1,7 +1,6 @@
 package com.example.sampletv.repo
 
 import com.example.sampletv.model.ShowItemModel
-import com.example.sampletv.room.ShowsEntity
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 

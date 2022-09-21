@@ -41,27 +41,20 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 viewmodel.getShows(query)
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
-
         })
 
-        // viewmodel.readShows.observe(requireActivity()){
-
-        //}
 
         CoroutineScope(Dispatchers.Main).launch {
             viewmodel.data.collect() { state ->
                 when (state) {
                     is UiState.loading -> {
                         Log.d("API Response: ", "LOADING")
-
                     }
                     is UiState.error -> {
                         Log.d("API Response: ", "Error -> ${state.error}")
-
                     }
                     is UiState.success<*> -> {
                         val response = state.response as ShowItemModel
@@ -75,7 +68,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun updateUI(response: ShowItemModel) {
         binding.showNameId.text = response.name
         val premieredDate = response.premiered
-
         binding.premieredDays.text = premieredDate?.let { getDatesDifference(it) }
 
         context?.let {

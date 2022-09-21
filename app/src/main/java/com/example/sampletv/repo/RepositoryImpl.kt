@@ -9,21 +9,21 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
-    val showDao: ShowsDao,
-    val apiDetails: ApiDetails
+    private val showDao: ShowsDao,
+    private val apiDetails: ApiDetails
 ) : Repository {
 
     override suspend fun getShows(query: String?): Response<ShowItemModel> {
         val localData = showDao.searchDatabase(query!!)
         if (localData != null) {
-            Log.e("Output", "data coming from database")
+            Log.e("Output", "data from database")
             return Response.success(localData)
         }
         val output = apiDetails.getTvShows(query)
         if (output.isSuccessful) {
             showDao.insertIntoDb(output.body()!!)
         }
-        Log.e("Output", "data coming from api")
+        Log.e("Output", "data from api")
         return output
     }
 

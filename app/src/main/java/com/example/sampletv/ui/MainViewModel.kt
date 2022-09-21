@@ -25,7 +25,6 @@ class MainViewModel @Inject constructor(val repository: Repository) : ViewModel(
             if (response.isSuccessful) {
                 _data.value = (
                         response.body()?.let { success ->
-                            //insertIntoDatabase(success)
                             UiState.success(success)
                         }!!
                         )
