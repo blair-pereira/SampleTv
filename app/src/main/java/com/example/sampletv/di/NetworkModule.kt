@@ -1,13 +1,18 @@
 package com.example.sampletv.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.sampletv.api.ApiDetails
 import com.example.sampletv.api.ApiReference
 import com.example.sampletv.repo.Repository
 import com.example.sampletv.repo.RepositoryImpl
+import com.example.sampletv.room.ShowsDao
+import com.example.sampletv.room.ShowsDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,26 +59,22 @@ class NetworkModule {
     }
 
     @Provides
-    fun getRepo(apiInterface: ApiDetails): Repository {
-        return RepositoryImpl(apiInterface)
+    fun getRepo(apiInterface: ApiDetails, showsDao: ShowsDao): Repository {
+        return RepositoryImpl(showsDao, apiInterface)
     }
 
-//    @Provides
-//    fun getRepo(apiInterface: ApiDetails, showsDao: ShowsDao): Repository {
-//        return RepositoryImpl(showsDao,apiInterface)
-//    }
-//
-//    @Provides
-//    fun provideShowDatabase(
-//        @ApplicationContext context: Context
-//    ) = Room.databaseBuilder(
-//        context,
-//        ShowsDatabase::class.java,
-//        "ShowsDatabase",
-//    ).build()
-//
-//    @Provides
-//    fun provideDao(database: ShowsDatabase) {
-//        return database.showsDao()
-//    }
+    @Provides
+    fun provideShowDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        ShowsDatabase::class.java,
+        "ShowsDatabase",
+    ).build()
+
+    @Provides
+    fun provideDao(database: ShowsDatabase): ShowsDao {
+        return database.showsDao()
+    }
+
 }

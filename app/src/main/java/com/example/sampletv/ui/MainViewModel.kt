@@ -16,7 +16,6 @@ class MainViewModel @Inject constructor(val repository: Repository) : ViewModel(
 
     private val _data: MutableStateFlow<UiState> = MutableStateFlow(UiState.loading)
     val data: StateFlow<UiState> get() = _data
-    //var data_DB = listOf<ShowsEntity>()
 
     fun getShows(showName: String?) {
         _data.value = (UiState.loading)
@@ -38,15 +37,5 @@ class MainViewModel @Inject constructor(val repository: Repository) : ViewModel(
 
         }
     }
-
-    //val readShows: LiveData<List<ShowsEntity>> = repository.getDataFromDb().asLiveData()
-
-//    fun insertIntoDatabase(model: ShowItemModel){
-//        val gitEntity = ShowsEntity(model)
-//        CoroutineScope(Dispatchers.IO).launch {
-//            repository.insertIntoDb(gitEntity)
-//        }
-//    }
-
 
 }

@@ -30,10 +30,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        view.hideKeyboard()
         val viewmodel by viewModels<MainViewModel>()
         binding = FragmentMainBinding.bind(view)
-        view.hideKeyboard()
+
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

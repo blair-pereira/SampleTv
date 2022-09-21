@@ -7,21 +7,22 @@ import androidx.room.TypeConverters
 import com.example.sampletv.room.ShowsTypeConverter
 import com.google.gson.annotations.SerializedName
 
-//@Entity(tableName = "Shows")
+@Entity(tableName = "Shows")
 data class ShowItemModel(
     @SerializedName("averageRuntime")
     val averageRuntime: Int? = 0,
     @SerializedName("ended")
     val ended: String? = "",
-    //@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
-    val id: Int = 0,
+    val id: Int,
     @SerializedName("image")
     val image: ImageModel? = ImageModel(),
     @SerializedName("language")
     val language: String? = "",
+
     @SerializedName("name")
-    val name: String? = "",
+    val name: String?="",
     @SerializedName("officialSite")
     val officialSite: String? = "",
     @SerializedName("premiered")

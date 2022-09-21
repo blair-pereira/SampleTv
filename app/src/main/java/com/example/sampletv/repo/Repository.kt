@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface Repository {
+
     suspend fun getShows(query :String?):Response<ShowItemModel>
-//    suspend fun insertIntoDb(showEntity: ShowsEntity)
-//    fun getDataFromDb(): Flow<List<ShowsEntity>>
+    suspend fun insertIntoDb(showEntity: ShowItemModel)
+    fun getDataFromDb(): Flow<List<ShowItemModel>>
 
 }
