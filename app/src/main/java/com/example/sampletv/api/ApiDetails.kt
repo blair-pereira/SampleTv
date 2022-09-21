@@ -6,10 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiDetails {
-
-
     @GET("singlesearch/shows")
     suspend fun getTvShows(@Query("q") q: String?):Response<ShowItemModel>
-
-
 }

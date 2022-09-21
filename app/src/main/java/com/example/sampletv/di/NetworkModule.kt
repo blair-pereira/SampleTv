@@ -1,18 +1,13 @@
 package com.example.sampletv.di
 
-import android.content.Context
-import androidx.room.Room
 import com.example.sampletv.api.ApiDetails
 import com.example.sampletv.api.ApiReference
 import com.example.sampletv.repo.Repository
 import com.example.sampletv.repo.RepositoryImpl
-import com.example.sampletv.room.ShowsDao
-import com.example.sampletv.room.ShowsDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -46,7 +41,7 @@ class NetworkModule {
 
 
     @Provides
-    fun retrofitBuilder(gson: Gson,okHttpClient: OkHttpClient): Retrofit =
+    fun retrofitBuilder(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(ApiReference.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -54,7 +49,7 @@ class NetworkModule {
             .build()
 
     @Provides
-    fun getApiDetail(retrofit: Retrofit):ApiDetails{
+    fun getApiDetail(retrofit: Retrofit): ApiDetails {
         return retrofit.create(ApiDetails::class.java)
     }
 

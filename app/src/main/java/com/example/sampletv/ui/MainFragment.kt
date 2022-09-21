@@ -28,8 +28,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,9 +48,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         })
 
-      // viewmodel.readShows.observe(requireActivity()){
+        // viewmodel.readShows.observe(requireActivity()){
 
-       //}
+        //}
 
         CoroutineScope(Dispatchers.Main).launch {
             viewmodel.data.collect() { state ->
@@ -82,28 +80,30 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         context?.let {
             Glide.with(it).load(response.image?.medium)
-                .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background)).into(binding.imageUrlId)
+                .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
+                .into(binding.imageUrlId)
         }
 
     }
 
-    private fun getDatesDifference(date:String):String{
-        lateinit var periodDifference :String
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
+    private fun getDatesDifference(date: String): String {
+        lateinit var periodDifference: String
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val from = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             // get today's date
             val today = LocalDate.now()
             // calculate the period between those two
             var period = Period.between(from, today)
-            periodDifference = "Last Premiered : ${period.years} Years - ${period.months} Months and ${period.days} days ago"
+            periodDifference =
+                "Last Premiered : ${period.years} Years - ${period.months} Months and ${period.days} days ago"
 
         }
         return periodDifference
     }
 
     fun View.hideKeyboard() {
-        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
