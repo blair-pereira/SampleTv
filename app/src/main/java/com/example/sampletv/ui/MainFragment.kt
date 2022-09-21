@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -73,11 +72,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 }
             }
         }
-
-
     }
-
-
 
     private fun updateUI(response: ShowItemModel) {
         binding.showNameId.text = response.name
@@ -92,8 +87,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     }
 
-    fun getDatesDifference(date:String):String{
-        lateinit var PeriodDifference :String
+    private fun getDatesDifference(date:String):String{
+        lateinit var periodDifference :String
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
             val from = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -101,10 +96,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val today = LocalDate.now()
             // calculate the period between those two
             var period = Period.between(from, today)
-            PeriodDifference = "Last Premiered : ${period.years} Years - ${period.months} Months and ${period.days} days"
+            periodDifference = "Last Premiered : ${period.years} Years - ${period.months} Months and ${period.days} days ago"
 
         }
-        return PeriodDifference
+        return periodDifference
     }
 
     fun View.hideKeyboard() {

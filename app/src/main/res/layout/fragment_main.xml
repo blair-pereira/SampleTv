@@ -51,7 +51,7 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                tools:text="Rock Show" />
+                android:text="Nothing To Display" />
 
             <TextView
                 android:id="@+id/premiered_days"
