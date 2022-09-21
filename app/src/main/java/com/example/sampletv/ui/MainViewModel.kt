@@ -30,7 +30,6 @@ class MainViewModel @Inject constructor(val repository: Repository) : ViewModel(
         CoroutineScope(Dispatchers.IO).launch {
 
             var response = repository.getShows(showName)
-            Log.d("API Response", "$response")
             if (response.isSuccessful) {
                 _data.value = (
                         response.body()?.let { success ->
